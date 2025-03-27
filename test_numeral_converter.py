@@ -44,6 +44,10 @@ def test_functionality():
     assert a == 99864556372192
     a = nc.convert_to_base(823, 99864556372192)
     assert a == [217, 556, 791, 452, 208]
+    a = nc.get_value(79, [2, 0, 11, 17, 0])
+    assert a == 77970156
+    a = nc.convert_to_base(79, 77970156)
+    assert a == [2, 0, 11, 17, 0]
 
 nc = NumeralConverter()
 test_validations()
