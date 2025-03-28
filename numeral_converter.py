@@ -21,6 +21,8 @@ class NumeralConverter():
             return False
         if type(digits) != list:
             return False
+        if len(digits) < 1:
+            return False
         for digit in digits:
             if type(digit) != int:
                 return False

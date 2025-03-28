@@ -16,6 +16,7 @@ def test_validations():
     assert nc._digits_valid(1, [0, 0, 0]) == False
     assert nc._digits_valid(3, 'a') == False
     assert nc._digits_valid(3, 1) == False
+    assert nc._digits_valid(3, []) == False
     assert nc._digits_valid(3, [-1, -1]) == False
     assert nc._digits_valid(3, [3, 3]) == False
     assert nc._digits_valid(3, [8, 8]) == False
