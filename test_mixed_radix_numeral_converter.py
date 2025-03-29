@@ -59,13 +59,5 @@ mrnc = MixedRadixNumeralConverter()
 test_validations()
 test_functionality()
 
-for i in range(30):
-    a = mrnc.convert_to_base(bases=[5, 3, 2], N=i)
-    print(a)
-
-for i1 in range(5):
-    for i2 in range(3):
-        for i3 in range(2):
-            a = mrnc.get_value(bases=[5, 3, 2], digits=[0, i1, i2, i3])
-            print(a)
-
+a = mrnc.get_value(bases=[5, 2, 3], digits=[1, 3, 0, 1])
+print(a)

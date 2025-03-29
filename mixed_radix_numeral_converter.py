@@ -53,13 +53,10 @@ class MixedRadixNumeralConverter():
 
     def _get_value(self, bases: list[int], digits: list[int]) -> int:
         nd = len(digits)
-        N = 0
+        N = digits[0]
 
-        i = nd - 1
-        while i >= 0:
-            combined_product = 1 if i == nd - 1 else combined_product * bases[i]
-            N += digits[i] * combined_product
-            i -= 1
+        for i in range(1, nd):
+            N = (N * bases[i - 1]) + digits[i]
 
         return N
 
@@ -70,21 +67,19 @@ class MixedRadixNumeralConverter():
         return self._get_value(bases, digits)
 
     def _convert_to_base(self, bases: list[int], N: int) -> list[int]:
-        remainder = N
+        N_temp = N
         digits = []
-        combined_product = 1
-        for base in bases:
-            combined_product *= base
-        baseidx = 0
 
-        while baseidx < len(bases):
-            digit = remainder // combined_product
-            digits.append(digit)
-            remainder -= digit * combined_product
-            combined_product = combined_product // bases[baseidx]
-            baseidx += 1
+        nb = len(bases)
 
-        digits.append(remainder)
+        for i in range(nb - 1, -1, -1):
+            digit = N_temp % bases[i]
+            digits.insert(0, digit)
+            N_temp = N_temp // bases[i]
+        
+        digit = N_temp
+        digits.insert(0, digit)
+
         return digits
 
     def convert_to_base(self, bases: list[int], N: int) -> list[int]:
@@ -94,3 +89,4 @@ class MixedRadixNumeralConverter():
             raise Exception(f"bases {bases} invalid")
 
         return self._convert_to_base(bases, N)
+
